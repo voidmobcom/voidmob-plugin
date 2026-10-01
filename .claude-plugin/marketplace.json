@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "voidmob",
+  "description": "VoidMob for Claude Code: the VoidMob MCP server and the voidmob skill as one plugin.",
+  "owner": {
+    "name": "VoidMob",
+    "url": "https://voidmob.com"
+  },
+  "plugins": [
+    {
+      "name": "voidmob",
+      "source": "./",
+      "description": "SMS verification codes for your own accounts on real US non-VoIP numbers, dedicated numbers, travel eSIM data and 4G/5G mobile proxies, paid from a prepaid VoidMob balance.",
+      "category": "productivity",
+      "homepage": "https://voidmob.com/mcp"
+    }
+  ]
+}

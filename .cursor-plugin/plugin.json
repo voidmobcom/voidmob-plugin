@@ -1,0 +1,41 @@
+{
+  "name": "voidmob",
+  "displayName": "VoidMob",
+  "version": "1.2.1",
+  "description": "Receive SMS verification codes for your own accounts on real US non-VoIP numbers, keep a dedicated number, buy eSIM data for travel, and use 4G/5G mobile IPs by country for geo testing. Paid from a prepaid VoidMob balance.",
+  "author": {
+    "name": "VoidMob",
+    "email": "info@voidmob.com"
+  },
+  "homepage": "https://voidmob.com/mcp",
+  "repository": "https://github.com/voidmobcom/voidmob-plugin",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "keywords": ["voidmob", "sms-verification", "otp", "non-voip", "esim", "mobile-proxy", "mcp"],
+  "category": "integrations",
+  "tags": ["sms", "esim", "proxy", "mcp"],
+  "minClientVersions": {
+    "grokbot": "never"
+  },
+  "skills": "./skills/",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "VOIDMOB_API_KEY": {
+        "type": "string",
+        "title": "VoidMob API key",
+        "description": "Your vmk_live_... key from https://dashboard.voidmob.com/developers/api-keys. It can spend your prepaid balance."
+      }
+    },
+    "required": ["VOIDMOB_API_KEY"]
+  },
+  "mcpServers": {
+    "voidmob": {
+      "command": "npx",
+      "args": ["-y", "@voidmob/mcp@1.2.1"],
+      "env": {
+        "VOIDMOB_API_KEY": "${VOIDMOB_API_KEY}"
+      }
+    }
+  }
+}

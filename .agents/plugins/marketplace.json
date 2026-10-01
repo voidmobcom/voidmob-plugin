@@ -1,0 +1,20 @@
+{
+  "name": "voidmob",
+  "interface": {
+    "displayName": "VoidMob"
+  },
+  "plugins": [
+    {
+      "name": "voidmob",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

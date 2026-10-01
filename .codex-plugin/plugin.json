@@ -1,0 +1,48 @@
+{
+  "name": "voidmob",
+  "version": "1.2.1",
+  "description": "Receive SMS verification codes for your own accounts on real US non-VoIP numbers, keep a dedicated number, buy eSIM data for travel, and use 4G/5G mobile IPs by country, paid from a prepaid VoidMob balance.",
+  "author": {
+    "name": "VoidMob",
+    "email": "info@voidmob.com",
+    "url": "https://voidmob.com"
+  },
+  "homepage": "https://voidmob.com/mcp",
+  "repository": "https://github.com/voidmobcom/voidmob-plugin",
+  "license": "MIT",
+  "keywords": ["voidmob", "sms-verification", "otp", "non-voip", "esim", "mobile-proxy", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "voidmob": {
+      "command": "npx",
+      "args": ["-y", "@voidmob/mcp@1.2.1"],
+      "env_vars": [
+        "VOIDMOB_API_KEY",
+        "VOIDMOB_SANDBOX",
+        "VOIDMOB_READ_ONLY",
+        "VOIDMOB_MAX_ORDER_CENTS",
+        "VOIDMOB_BUDGET_CENTS"
+      ]
+    }
+  },
+  "interface": {
+    "displayName": "VoidMob",
+    "shortDescription": "SMS codes, eSIMs, mobile IPs",
+    "longDescription": "Search, price and buy VoidMob services from your prepaid USD balance: US non-VoIP numbers that receive SMS verification codes for your own accounts (refunded automatically when no SMS arrives), longer rentals and dedicated numbers, eSIM data plans for travel, and shared or dedicated 4G/5G mobile proxies. Every purchase needs a max price you have seen. Set VOIDMOB_API_KEY in your shell before starting Codex, or VOIDMOB_SANDBOX=1 to try every flow with mock data and no key.",
+    "developerName": "VoidMob",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://voidmob.com",
+    "supportURL": "https://github.com/voidmobcom/voidmob-mcp/issues",
+    "privacyPolicyURL": "https://voidmob.com/privacy",
+    "termsOfServiceURL": "https://voidmob.com/terms",
+    "defaultPrompt": [
+      "What is my VoidMob balance?",
+      "Get a US number to receive a verification code for my own account.",
+      "Find an eSIM data plan for 7 days in Japan."
+    ],
+    "brandColor": "#8B5CF6",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

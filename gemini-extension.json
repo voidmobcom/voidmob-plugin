@@ -1,0 +1,39 @@
+{
+  "name": "voidmob",
+  "version": "1.2.1",
+  "description": "Receive SMS verification codes for your own accounts on real US non-VoIP numbers, keep a dedicated number, buy eSIM data for travel, and use 4G/5G mobile IPs by country, paid from a prepaid VoidMob balance.",
+  "mcpServers": {
+    "voidmob": {
+      "command": "npx",
+      "args": ["-y", "@voidmob/mcp@1.2.1"]
+    }
+  },
+  "settings": [
+    {
+      "name": "VoidMob API key",
+      "description": "Your vmk_live_... key from https://dashboard.voidmob.com/developers/api-keys. It can spend your prepaid balance. Leave empty with sandbox mode on.",
+      "envVar": "VOIDMOB_API_KEY",
+      "sensitive": true
+    },
+    {
+      "name": "Sandbox mode",
+      "description": "1 = offline mock data with a $500 play balance, nothing is charged. Leave empty for live mode.",
+      "envVar": "VOIDMOB_SANDBOX"
+    },
+    {
+      "name": "Read-only",
+      "description": "1 = hide every tool that spends money or changes anything. Leave empty to allow purchases.",
+      "envVar": "VOIDMOB_READ_ONLY"
+    },
+    {
+      "name": "Max per order (US cents)",
+      "description": "Refuse any single purchase above this many whole US cents (2500 = $25.00). Leave empty for no limit.",
+      "envVar": "VOIDMOB_MAX_ORDER_CENTS"
+    },
+    {
+      "name": "Session budget (US cents)",
+      "description": "Stop buying once this many whole US cents were spent since the server started (5000 = $50.00). Leave empty for no budget.",
+      "envVar": "VOIDMOB_BUDGET_CENTS"
+    }
+  ]
+}
