@@ -10,7 +10,7 @@
   "homepage": "https://voidmob.com/mcp",
   "repository": "https://github.com/voidmobcom/voidmob-plugin",
   "license": "MIT",
-  "logo": "assets/logo.png",
+  "logo": "https://raw.githubusercontent.com/voidmobcom/voidmob-plugin/main/assets/logo.png",
   "keywords": ["voidmob", "sms-verification", "otp", "non-voip", "esim", "mobile-proxy", "mcp"],
   "category": "integrations",
   "tags": ["sms", "esim", "proxy", "mcp"],
