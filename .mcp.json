@@ -2,13 +2,14 @@
   "mcpServers": {
     "voidmob": {
       "command": "npx",
-      "args": ["-y", "@voidmob/mcp@1.2.1"],
+      "args": ["-y", "@voidmob/mcp@2.0.0"],
       "env": {
         "VOIDMOB_API_KEY": "${user_config.api_key}",
         "VOIDMOB_SANDBOX": "${user_config.sandbox}",
         "VOIDMOB_READ_ONLY": "${user_config.read_only}",
         "VOIDMOB_MAX_ORDER_CENTS": "${user_config.max_order_cents}",
-        "VOIDMOB_BUDGET_CENTS": "${user_config.budget_cents}"
+        "VOIDMOB_BUDGET_CENTS": "${user_config.budget_cents}",
+        "VOIDMOB_AUTONOMOUS": "${user_config.autonomous}"
       }
     }
   }

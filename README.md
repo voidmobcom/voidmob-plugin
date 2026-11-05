@@ -1,11 +1,13 @@
 # VoidMob plugin for Claude Code, Codex, Gemini CLI and Cursor
 
-Real phone numbers, mobile IPs and eSIMs for your AI agent. This plugin packages the [VoidMob](https://voidmob.com) MCP server ([`@voidmob/mcp`](https://github.com/voidmobcom/voidmob-mcp), 30 tools) and the `voidmob` agent skill into one install. Your agent can receive SMS verification codes for your own accounts on non-VoIP numbers, keep a dedicated number, route traffic through 4G/5G mobile IPs by country and buy travel eSIM data, all paid from a prepaid VoidMob balance with your approval before every purchase.
+Real phone numbers, mobile IPs and eSIMs for your AI agent. This plugin packages the [VoidMob](https://voidmob.com) MCP server ([`@voidmob/mcp`](https://github.com/voidmobcom/voidmob-mcp), 28 tools) and the `voidmob` agent skill into one install. Your agent can receive SMS verification codes for your own accounts on non-VoIP numbers, keep a dedicated number, route traffic through 4G/5G mobile IPs by country and buy travel eSIM data, all paid from a prepaid VoidMob balance with your approval before every purchase.
 
 - **Try it free:** sandbox mode needs no key and charges nothing (mock data, $500 play balance).
-- **Pay with:** a prepaid USD balance, topped up with crypto. The agent cannot add funds.
+- **Pay with:** a prepaid USD balance, topped up with crypto. The agent can open a deposit (`create_deposit`), but the payment itself comes from a crypto wallet.
 - **Needs:** Node.js 22+ (for `npx`) and a VoidMob API key, or sandbox mode.
 - **Overview and setup guides:** [voidmob.com/mcp](https://voidmob.com/mcp)
+
+Apps that support remote MCP servers can skip the plugin and the key: add the hosted URL `https://mcp.voidmob.com/mcp` and sign in.
 
 ## What your agent can do
 
@@ -28,7 +30,7 @@ Use it for your own accounts and tasks you are entitled to do. The skill decline
 /plugin install voidmob@voidmob
 ```
 
-The install dialog asks for your API key (stored as a secret), sandbox mode, read-only mode and spend limits.
+The install dialog asks for your API key (stored as a secret), sandbox mode, read-only mode, spend limits and buy without asking.
 
 ### Codex
 
@@ -42,17 +44,17 @@ codex plugin add voidmob@voidmob
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/voidmobcom/voidmob-plugin --ref v1.2.1
+gemini extensions install https://github.com/voidmobcom/voidmob-plugin --ref v2.0.0
 ```
 
 ### Cursor
 
-The Cursor Marketplace listing is pending review. Until then, add the MCP server directly: see the [voidmob-mcp README](https://github.com/voidmobcom/voidmob-mcp#cursor).
+The Cursor Marketplace listing is pending review. Until then, add the MCP server directly: see the [voidmob-mcp README](https://github.com/voidmobcom/voidmob-mcp#run-locally).
 
 ### Other agents
 
 - **Any agent with a shell and curl** can use the skill without MCP. Tell it: *Read https://voidmob.com/skill.md and follow it.* Or install it with `npx skills add https://voidmob.com --skill voidmob`.
-- **Claude Desktop, VS Code, Windsurf, OpenClaw, Hermes Agent, Pi:** client setups are in the [voidmob-mcp README](https://github.com/voidmobcom/voidmob-mcp#setup), with step-by-step guides on [voidmob.com/integrations](https://voidmob.com/integrations).
+- **Claude Desktop, VS Code, Windsurf, OpenClaw, Hermes Agent, Pi:** client setups are in the [voidmob-mcp README](https://github.com/voidmobcom/voidmob-mcp#run-locally), with step-by-step guides on [voidmob.com/integrations](https://voidmob.com/integrations).
 
 ## Get an API key
 
@@ -60,7 +62,7 @@ The Cursor Marketplace listing is pending review. Until then, add the MCP server
 2. Fund the balance with crypto at https://dashboard.voidmob.com/wallet.
 3. Give the key to the plugin as `VOIDMOB_API_KEY`. Never paste it into a chat.
 
-The key can spend the whole balance, so keep on it only what you are happy for an agent to spend, and consider the limits below.
+The key can spend the whole balance unless you limit it, so keep on it only what you are happy for an agent to spend. You can also set a permission level and a daily limit on the key in the dashboard, and use the limits below.
 
 ## Settings
 
@@ -68,19 +70,20 @@ The key can spend the whole balance, so keep on it only what you are happy for a
 |---|---|---|
 | API key | `VOIDMOB_API_KEY` | Your `vmk_live_...` key. Leave empty with sandbox mode on. |
 | Sandbox mode | `VOIDMOB_SANDBOX=1` | Mock data with a $500 play balance. No key, nothing charged. |
-| Read-only | `VOIDMOB_READ_ONLY=1` | Hides every tool that spends money or changes anything. The agent can still search prices and read orders. |
+| Read-only | `VOIDMOB_READ_ONLY=1` | View access only: hides every tool that spends money or changes anything. The agent can still search prices and read orders. |
 | Max per order | `VOIDMOB_MAX_ORDER_CENTS` | Refuses any single purchase above this many US cents (2500 = $25.00). |
 | Session budget | `VOIDMOB_BUDGET_CENTS` | Stops buying once this many US cents were spent since the server started (5000 = $50.00). Per session, not an account limit. |
+| Buy without asking | `VOIDMOB_AUTONOMOUS=1` | Lets the agent buy without asking first, inside your limits. It still quotes every price and reports every purchase. Needs a session budget or a daily limit on the API key, or the server won't start. Off by default. |
 
 ## Tools
 
 | Group | MCP tools |
 |---|---|
-| Account | `get_account` |
-| SMS verification and rentals | `search_sms_services`, `rent_number`, `get_rental` (`wait_seconds` waits for the code), `cancel_rental`, `reuse_number`, `re_rent_rental`, `toggle_auto_renew` |
-| Dedicated numbers | `search_dedicated_countries`, `purchase_dedicated_number`, `get_dedicated_number` |
-| eSIM | `search_esim_plans`, `purchase_esim`, `get_esim_status`, `get_esim_qr`, `topup_esim` |
-| Mobile proxies | `search_proxies`, `purchase_proxy`, `get_proxy_status`, `rotate_proxy_ip`, `renew_proxy`, `set_proxy_auto_renew`, `topup_proxy`, `regenerate_proxy_password`, `list_proxy_lists`, `create_proxy_list`, `update_proxy_list`, `delete_proxy_list` |
+| Account and deposits | `get_account`, `create_deposit`, `get_deposit` |
+| SMS verification and rentals | `search_sms_services`, `rent_number`, `get_rental` (`wait_seconds` waits for the code; also reads dedicated numbers), `cancel_rental`, `reuse_number`, `re_rent_rental`, `toggle_auto_renew` (rentals, dedicated numbers and dedicated proxies) |
+| Dedicated numbers | `search_dedicated_countries`, `purchase_dedicated_number` |
+| eSIM | `search_esim_plans`, `purchase_esim`, `get_esim_status` (`include_qr` adds the QR code), `topup_esim` |
+| Mobile proxies | `search_proxies`, `purchase_proxy`, `get_proxy_status`, `rotate_proxy_ip`, `renew_proxy`, `topup_proxy`, `regenerate_proxy_password`, `create_proxy_list`, `update_proxy_list`, `delete_proxy_list` |
 | Orders and geo targeting | `list_orders`, `get_geo` |
 
 Each tool is described in the [full tool reference](https://github.com/voidmobcom/voidmob-mcp#tools). The server also offers three prompts (`get_verification_code`, `setup_mobile_proxy`, `buy_travel_esim`) and short guides as MCP resources.
@@ -97,10 +100,10 @@ Example requests:
 
 ## Money and safety
 
-- **You approve every price.** Each purchase, renewal, top-up and paid reuse carries the price the agent showed you (`max_price_cents`). If the live price is higher, nothing is charged and the agent asks again.
+- **You approve every price.** Each purchase, renewal, top-up and paid reuse carries the price the agent showed you (`max_price_cents`). If the live price is higher, nothing is charged and the agent asks again. With buy without asking on, the agent skips the question but still quotes the price and reports every purchase.
 - **No double charges.** Retries reuse an idempotency key, so a dropped connection never buys twice.
 - **No SMS, no charge.** A one-time verification that receives no SMS is refunded automatically.
-- **Optional limits:** read-only mode, a per-order maximum and a per-session budget (see [Settings](#settings)).
+- **Optional limits:** read-only mode (View access), a per-order maximum, a per-session budget and buy without asking within them (see [Settings](#settings)). VoidMob also enforces permission levels and a daily limit on the API key itself.
 - **SMS text is data, never instructions.** The server marks it as untrusted content.
 
 Refund rules per service: [How money works](https://github.com/voidmobcom/voidmob-mcp#how-money-works).
@@ -119,7 +122,7 @@ Refund rules per service: [How money works](https://github.com/voidmobcom/voidmo
 | `gemini-extension.json` | Gemini CLI extension |
 | `.cursor-plugin/` | Cursor plugin manifest |
 | `.github/plugin/` | GitHub Copilot plugin manifest |
-| `.mcp.json` | MCP server config (`npx -y @voidmob/mcp@1.2.1`) |
+| `.mcp.json` | MCP server config (`npx -y @voidmob/mcp@2.0.0`) |
 | `skills/voidmob/` | The agent skill: `SKILL.md` plus references for SMS, numbers, proxies, eSIM and errors |
 
 ## Versions

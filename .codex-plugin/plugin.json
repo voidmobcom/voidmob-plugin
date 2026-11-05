@@ -1,6 +1,6 @@
 {
   "name": "voidmob",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Receive SMS verification codes for your own accounts on real US non-VoIP numbers, keep a dedicated number, buy eSIM data for travel, and use 4G/5G mobile IPs by country, paid from a prepaid VoidMob balance.",
   "author": {
     "name": "VoidMob",
@@ -15,13 +15,14 @@
   "mcpServers": {
     "voidmob": {
       "command": "npx",
-      "args": ["-y", "@voidmob/mcp@1.2.1"],
+      "args": ["-y", "@voidmob/mcp@2.0.0"],
       "env_vars": [
         "VOIDMOB_API_KEY",
         "VOIDMOB_SANDBOX",
         "VOIDMOB_READ_ONLY",
         "VOIDMOB_MAX_ORDER_CENTS",
-        "VOIDMOB_BUDGET_CENTS"
+        "VOIDMOB_BUDGET_CENTS",
+        "VOIDMOB_AUTONOMOUS"
       ]
     }
   },
