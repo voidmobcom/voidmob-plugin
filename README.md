@@ -44,7 +44,7 @@ codex plugin add voidmob@voidmob
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/voidmobcom/voidmob-plugin --ref v2.0.0
+gemini extensions install https://github.com/voidmobcom/voidmob-plugin --ref v2.1.0
 ```
 
 ### Cursor
@@ -122,7 +122,7 @@ Refund rules per service: [How money works](https://github.com/voidmobcom/voidmo
 | `gemini-extension.json` | Gemini CLI extension |
 | `.cursor-plugin/` | Cursor plugin manifest |
 | `.github/plugin/` | GitHub Copilot plugin manifest |
-| `.mcp.json` | MCP server config (`npx -y @voidmob/mcp@2.0.0`) |
+| `.mcp.json` | MCP server config (`npx -y @voidmob/mcp@2.1.0`) |
 | `skills/voidmob/` | The agent skill: `SKILL.md` plus references for SMS, numbers, proxies, eSIM and errors |
 
 ## Versions

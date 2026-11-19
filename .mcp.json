@@ -2,7 +2,7 @@
   "mcpServers": {
     "voidmob": {
       "command": "npx",
-      "args": ["-y", "@voidmob/mcp@2.0.0"],
+      "args": ["-y", "@voidmob/mcp@2.1.0"],
       "env": {
         "VOIDMOB_API_KEY": "${user_config.api_key}",
         "VOIDMOB_SANDBOX": "${user_config.sandbox}",
